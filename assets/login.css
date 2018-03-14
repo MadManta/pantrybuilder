@@ -12,9 +12,11 @@ h1{
     text-align: center;
 }
 
-/* .form-control{
-    width: 500px;
-} */
+.form-control{
+    width: 400px;
+    display: initial ;
+   vertical-align: middle;
+}
 
 #login-input{
     text-align: center;
