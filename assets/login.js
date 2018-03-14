@@ -29,7 +29,7 @@ var database = firebase.database();
             dateAdded: firebase.database.ServerValue.TIMESTAMP
 
             });
-
+            $("#login-input").trigger('reset');
 
     });
     
