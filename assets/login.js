@@ -11,35 +11,11 @@ messagingSenderId: "44047573836"
 };
 firebase.initializeApp(config);
 
-var database = firebase.database();
-
-    // Initial Values
-    var name = "";
-    var password = "";
-
-    $("#login").on("click", function(event) {
-        event.preventDefault();
-
-        name = $("#user-name").val().trim();
-        password = $("#userPassword").val().trim();
-       
-        database.ref().push({
-            name: name,
-            password: password,
-            dateAdded: firebase.database.ServerValue.TIMESTAMP
-
-            });
-            $("#login-input").trigger('reset');
-
-    });
-    
-
 var uiConfig = {
-    signInSuccessUrl: '<url-to-redirect-to-on-success>',
+    signInSuccessUrl: "mainPage.html",
     signInOptions: [
       // Leave the lines as is for the providers you want to offer your users.
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
       firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
     // Terms of service url.
@@ -64,7 +40,6 @@ var uiConfig = {
         // console.
         clientId: 'xxxxxxxxxxxxxxxxx.apps.googleusercontent.com'
       },
-      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
       firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
     // Required to enable one-tap sign-up credential helper.
@@ -73,3 +48,26 @@ var uiConfig = {
   // Auto sign-in for returning users is enabled by default except when prompt is
   // not 'none' in the Google provider custom parameters. To manually disable:
   ui.disableAutoSignIn();
+
+  //Auth Check & User Log
+
+
+   firebase.auth().onAuthStateChanged(function(user) {
+     
+     user = user;
+
+     console.log('user', 'authStateChanged', user);
+   });
+
+  // User Signout
+     $("#logout").click(function() {
+       firebase.auth().signOut().then(function() {
+     // Sign-out successful.
+       window.location.replace("login.html");
+       }).catch(function(error) {
+     // An error happened.
+       console.log('Logout Error');
+       });
+    });
+
+    

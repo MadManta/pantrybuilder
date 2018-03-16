@@ -21,13 +21,34 @@
             <div class="col-12">
             <h1>Kitchen Kit</h1>
             
-            <div id="firebaseui-auth-container"></div>  
-            
-        </div>
+                   
+                    <button type="submit" id="logout" class="btn btn-primary">Logout</button>
+
+            </div>
         </div>
     </div>
 
     
+<script>
+
+
+
+
+
+
+// Create a callback which logs the current auth state
+function authDataCallback(authData) {
+  if (authData) {
+    console.log("User " + authData.uid + " is logged in with " + authData.provider);
+  } else {
+    console.log("User is logged out");
+  }
+}
+
+
+
+</script>
+   
 
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="assets/login.js"></script>    
