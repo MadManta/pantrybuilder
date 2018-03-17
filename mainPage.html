@@ -73,7 +73,32 @@
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                 <div class="card-body">
-                    this will be an apended list of items
+                    <div class="row">
+                                <div class="col-1">
+            
+                                    
+                                </div>
+            
+                                <div class="col-7">
+                                    
+                                            <ul id="grocerylist">
+            
+                                    
+                                    
+                                </div>
+                                <!-- API SEARCH BUTTON-->
+                                <div class="col-4">
+                                    <div class="addshoppinglist">
+                                            <form class="form-inline">
+                                                <input class="form-control mr-sm-2" type="search" placeholder="Search" id="addshopping" aria-label="Search">
+                                                <button class="btn btn-outline-success my-2 my-sm-0" id="grocery" type="submit">Add Food</button>
+                                            </form>
+                                    </div>
+                                    <div id="groceryusda">
+                                        search results here
+                                    </div>
+                                </div>
+                            </div>
                 </div>
             </div>
         </div>
@@ -97,6 +122,37 @@
         <script src="html5sortable.js"></script>
         <!-- Script -->
         <script>
+           //Sammy's Grocery add API
+
+            $("#grocery").on("click", function (event) {
+                event.preventDefault();
+                var additem = $("#addshopping").val().trim();
+                $("#groceryusda").empty();
+                var queryURL = "https://api.nal.usda.gov/ndb/search/?&format=json&q=" + additem + "&ds=Standard+Reference&sort=r&max=10&offset=0&api_key=uyNSkR4G2nmzLN1z7unvxh1JMdwZ0IXiPP8k1QXE";
+                $.ajax({
+                    url: queryURL,
+                    method: 'GET'
+                }).then(function (response) {
+                    console.log(response);
+                    var results = response.list.item;
+
+                    for (var i = 0; i < results.length; i++) {
+                        var foodDiv = $("<div>");
+                        var list = $("<li>");
+                        list.html(results[i].name);
+                        list.attr("data-id", results[i].name);
+                        foodDiv.append(list);
+                        $("#groceryusda").append(foodDiv);
+                    };
+                    console.log(results)
+
+                    $("li").on("click", function (event) {
+                        var newFood = $(this).data("id");
+                        $("#grocerylist").append("<li>" + newFood + "</li>");
+                        console.log(newFood);
+                    });
+                });
+            });
             //Sammy's Sort Items
             $( function() {
             $( ".sortable" ).sortable();
