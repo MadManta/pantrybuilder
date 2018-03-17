@@ -12,8 +12,8 @@
     <!-- Title -->
     <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-3">Fluid jumbotron</h1>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    <h1 class="display-3">Pantry Planner</h1>
+    <p class="lead">A handy app to help you manage your pantry and grocery list!.</p>
   </div>
 </div>
     <!-- Input Form -->
@@ -70,6 +70,7 @@
                         Grocery List
                     </button>
                 </h5>
+
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                 <div class="card-body">
@@ -112,7 +113,61 @@
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                 <div class="card-body">
-                    this will have a search bar that will show ingredients for recipes that we can select and append them to the ht
+                    <div class = "form-group">
+            <label for = "recipeName">Recipe Name: </label>
+            <input type = "text" id = "recipeName">
+        </div>
+        <table id = "ingTable" class = "table">
+            <thead>
+                <tr>
+                        
+                        <th id = "tableIng">Ingredient</th>
+                        <th id = "tableMeas">Amt.</th>
+                        <th id = "tableUnit">Unit</th>
+                        <th id = "tableAdd"></th>
+                        </div>
+                    </div>
+                </tr>
+            </thead>
+            <tbody id = "ingredients">
+                <div class = "form-group row">
+                    <td><!--where to enter the name of the ingredient-->
+                        <input type = "text" class = "form-control ingredient" id = "ing1">
+                    </td>
+                    <td><!--enter the amount as a number-->
+                        <input type = "number" class = "form-control measure" id = "meas1">
+                    </td>
+                    <td><!--enter the unit of measure-->
+                        <select class = "form-control unit" id = "unit1">
+                            <option>-----</option>
+                            <option>each</option>
+                            <option>tsp</option>
+                            <option>Tbsp</option>
+                            <option>cup(s)</option>
+                            <option>qt</option>
+                            <option>gal</option>
+                            <option>oz</option>
+                            <option>lbs</option>
+                            <option>ml</option>
+                            <option>L</option>
+                            <option>mg</option>
+                            <option>g</option>
+                            <option>Kg</option>
+                        </select>
+                    </td>
+                    <td><!--button to add another ingredient-->
+                        <button class = "addIngredient" id = "addIng1"><strong>+</strong></button>
+                    </td>
+                </div>
+            </tbody>
+        </table>
+        <div class = "form-group">
+            <label for="directions">Directions:</label>
+            <textarea class = "form-control" id = "directions" rows = "5"></textarea>
+        </div>
+        <button class = "btn btn-primary" id = "addRecipe">Done</button>
+    </div>
+
                 </div>
             </div>
         </div>
@@ -122,6 +177,8 @@
         <script src="html5sortable.js"></script>
         <!-- Script -->
         <script>
+          //bobs recipe query
+          
            //Sammy's Grocery add API
 
             $("#grocery").on("click", function (event) {
