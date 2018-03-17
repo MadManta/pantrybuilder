@@ -11,42 +11,7 @@ messagingSenderId: "44047573836"
 };
 firebase.initializeApp(config);
 
-var database = firebase.database();
 
-    // Initial Values
-    var Food = [];
-    
-// Capture Button Click
-    $("li").on("click", function(event) {
-      event.preventDefault();
-      
-      Food = $("#pantry").html();
-     console.log(Food);
-
-      // Code for "Setting values in the database"
-      database.ref().set({
-        Food: Food,
-        
-      });
-
-    });
-
-    // Firebase watcher + initial loader HINT: .on("value")
-    database.ref().on("value", function(snapshot) {
-
-      // Log everything that's coming out of snapshot
-      console.log(snapshot.val());
-      console.log(snapshot.val().Food);
-
-
-      // Change the HTML to reflect
-      $("#pantry").append(snapshot.val().Food);
-
-
-      // Handle the errors
-    // }, function(errorObject) {
-    //   console.log("Errors handled: " + errorObject.code);
-    });
 
 
 
