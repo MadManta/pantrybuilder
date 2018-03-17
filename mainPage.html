@@ -29,28 +29,46 @@
     </div>
 
     
-<script>
 
 
 
 
 
 
-// Create a callback which logs the current auth state
-function authDataCallback(authData) {
-  if (authData) {
-    console.log("User " + authData.uid + " is logged in with " + authData.provider);
-  } else {
-    console.log("User is logged out");
-  }
-}
-
-
-
-</script>
    
 
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="assets/login.js"></script>    
+
+<script>
+ // User Signout
+ $("#logout").click(function() {
+       firebase.auth().signOut().then(function() {
+     // Sign-out successful.
+       window.location.replace("login.html");
+       }).catch(function(error) {
+     // An error happened.
+       console.log('Logout Error');
+       });
+    });
+
+
+// Create a callback which logs the current auth state
+firebase.auth().onAuthStateChanged(function(user) {
+    console.log('authStateChanged', user);
+    if (user) {
+        
+       console.log(user);
+       
+     
+    } else {
+      window.location.replace("login.html");
+    }
+  });
+
+
+  
+
+</script>
 </body>
 </html>
