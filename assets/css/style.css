@@ -1,4 +1,5 @@
 
-#jumbo{
-	background-color: blue;
+.jumbotron{
+	
+	  background-image: url("../images/pasta.jpg");
 }
