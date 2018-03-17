@@ -14,20 +14,18 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
     // Initial Values
-    var name = "";
+    var Food = [];
     
-
-    // Capture Button Click
-    $("#add-user").on("click", function(event) {
+// Capture Button Click
+    $("li").on("click", function(event) {
       event.preventDefault();
       
-      // Grabbed values from text-boxes
-      name = $("#name-input").val().trim();
-     
+      Food = $("#pantry").html();
+     console.log(Food);
 
       // Code for "Setting values in the database"
       database.ref().set({
-        name: name,
+        Food: Food,
         
       });
 
@@ -38,16 +36,16 @@ var database = firebase.database();
 
       // Log everything that's coming out of snapshot
       console.log(snapshot.val());
-      console.log(snapshot.val().name);
+      console.log(snapshot.val().Food);
 
 
       // Change the HTML to reflect
-      $("#name-display").text(snapshot.val().name);
+      $("#pantry").append(snapshot.val().Food);
 
 
       // Handle the errors
-    }, function(errorObject) {
-      console.log("Errors handled: " + errorObject.code);
+    // }, function(errorObject) {
+    //   console.log("Errors handled: " + errorObject.code);
     });
 
 
