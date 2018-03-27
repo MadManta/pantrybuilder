@@ -11,28 +11,6 @@ messagingSenderId: "44047573836"
 };
 firebase.initializeApp(config);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//
 //
 // login/authentication setion of firebase
 //
