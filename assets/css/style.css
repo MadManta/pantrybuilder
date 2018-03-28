@@ -6,29 +6,34 @@
        
 
 }
+.card{
+	opacity: .9;
+}
+
+
 
 body{background-image: url("../images/foodimage.jpg");
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
+    }
+    @media screen and (min-width: width:980px;){
 
-        
+        @media screen and (min-width: width:768px;){
+
+		body{
+			padding-top: 50px;
+		}
+		@media screen and (min-width: width:640px;){
+
+		body{
+			padding-top: 50px;
+		}
  
 }
 
-#collapseOne{
-	background-color: #E2E3E3;
-	opacity:0.9;
-}
-#collapseTwo{
-	background-color: #E2E3E3;
-	opacity:0.9;
-}
-#collapseThree{
-	background-color: #E2E3E3;
-	opacity:0.9;
-}
+
 .card{
 	opacity: .9;
 }
