@@ -29,8 +29,7 @@ body{background-image: url("../images/foodimage.jpg");
 	background-color: #E2E3E3;
 	opacity:0.9;
 }
-.row{
-	opacity:09;
+.card{
+	opacity: .9;
 }
-
 
