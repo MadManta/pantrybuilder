@@ -1,5 +1,21 @@
 
 .jumbotron{
+	opacity:0.5;
 	
-	  background-image: url("../images/pasta.jpg");
+
+       
+
 }
+
+body{background-image: url("../images/foodimage.jpg");
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+
+        
+ 
+}
+
+
+
