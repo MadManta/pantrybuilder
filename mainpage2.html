@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,16 +13,20 @@
     <script src="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.css" />
     <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+
     <title>Kitchen Kit Login</title>
 </head>
+
 <body>
     <!-- Title -->
     <!-- Input Form -->
+
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <button type="submit" id="logout" class="btn btn-primary">Logout</button>
             <h1 class="display-3">Pantry Planner</h1>
             <p class="lead">an interractive website for you to plan your shopping.</p>
+
         </div>
     </div>
     <div class="container">
@@ -37,7 +42,7 @@
                 <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Food I already have in my damn pantry
+                            Food Search
                         </button>
                     </h5>
                 </div>
@@ -104,36 +109,63 @@
             <script>
                 $(document).ready(function () {
                     var pantryArray = [];
+                    var foodCount = 0;
                     //Sammy's food API
-                    $("#submit").on("click", function (event) {
-                        event.preventDefault();
-                        var additem = $("#additem").val().trim();
-                        $("#listfood").empty();
-                        var queryURL = "https://api.nal.usda.gov/ndb/search/?&format=json&q=" + additem + "&ds=Standard+Reference&sort=r&max=10&offset=0&api_key=uyNSkR4G2nmzLN1z7unvxh1JMdwZ0IXiPP8k1QXE";
-                        $.ajax({
-                            url: queryURL,
-                            method: 'GET'
-                        }).then(function (response) {
-                            console.log(response);
-                            var results = response.list.item;
-                            for (var i = 0; i < results.length; i++) {
-                                var foodDiv = $("<div>");
-                                var list = $("<li>");
-                                list.html(results[i].name);
-                                list.attr("data-id", results[i].name);
-                                foodDiv.append(list);
-                                $("#listfood").append(foodDiv);
-                            };
-                            console.log(results)
-                            $("li").on("click", function (event) {
-                                var newFood = $(this).data("id");
-                                pantryArray.push(newFood);
-                                console.log(pantryArray);
-                                database.ref("pantry/" + currentUser.uid).push(newFood);
-                            });
-                        });
-                        var database = firebase.database();
-                    });
+                    var pantryArray = JSON.parse(database.ref("pantry/" + currentUser.uid));
+    // Checks to see if the todolist exists in localStorage and is an array currently
+    // If not, set a local pantryArray variable to an empty array
+    // Otherwise pantryArray is our current pantryArray of todos
+    if (!Array.isArray(pantryArray)) {
+      pantryArray = [];
+    }
+    function putOnPage() {
+      $("#todo-pantryArray").empty(); // empties out the html
+      var insideList = JSON.parse(database.ref("pantry/" + currentUser.uid));
+      // Checks to see if we have any todos in localStorage
+      // If we do, set the local insideList variable to our todos
+      // Otherwise set the local insideList variable to an empty array
+      if (!Array.isArray(insideList)) {
+        insideList = [];
+      }
+      // render our insideList todos to the page
+      for (var i = 0; i < insideList.length; i++) {
+        var p = $("<li>").text(insideList[i]);
+        var b = $("<button class='delete'>").text("x").attr("data-index", i);
+        p.prepend(b);
+        $("#todo-pantryArray").prepend(p);
+      }
+    }
+    // render our todos on page load
+    putOnPage();
+    $(document).on("click", "button.delete", function() {
+      var foodList = JSON.parse(database.ref("pantry/" + currentUser.uid));
+      var currentIndex = $(this).attr("data-index");
+      // Deletes the item marked for deletion
+      foodList.splice(currentIndex, 1);
+      pantryArray = foodList;
+      database.ref("pantry/" + currentUser.uid, JSON.stringify(foodList));
+      putOnPage();
+    });
+    $("#submit").on("click", function(event) {
+      event.preventDefault();
+      // Setting the input value to a variable and then clearing the input
+      var val = $("#additem").val();
+      $("#additem").val("");
+      // Adding our new todo to our local pantryArray variable and adding it to local storage
+      pantryArray.push(val);
+      database.ref("pantry/" + currentUser.uid, JSON.stringify(pantryArray));
+      putOnPage();
+    });
+                    var database = firebase.database();
+                        //     console.log(results)
+                        //     $("li").on("click", function (event) {
+                        //         var newFood = $(this).data("id");
+                        //         pantryArray.push(newFood);
+                        //         console.log(pantryArray);
+                        //         database.ref("pantry/" + currentUser.uid).push(newFood);
+                        //     });
+                        // });
+                        // var database = firebase.database();
                     var currentUser;
                     // Create a callback which logs the current auth state
                     firebase.auth().onAuthStateChanged(function (user) {
@@ -203,9 +235,21 @@
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
                 crossorigin="anonymous"></script>
             <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
             <!-- logout and auth  -->
             <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
             <script type="text/javascript" src="assets/login.js"></script>
+
             <script>
                 // User Signout
                 $("#logout").click(function () {
@@ -219,4 +263,5 @@
                 });
             </script>
 </body>
+
 </html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>Local Storage To-Do List</title>
+</head>
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.css" />
+<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+<body>
+  <h1>To-Do List Persisted with Local Storage</h1>
+  <form>
+    <input type="text">
+    <input type="submit" value="save">
+  </form>
+  <div id="todo-pantryArray"></div>
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script type="text/javascript">
+    var config = {
+    apiKey: "AIzaSyDdKJdKWyBww3paQE--cB_cF8SPa-FJn3c",
+    authDomain: "kitchenkit-bf8b5.firebaseapp.com",
+    databaseURL: "https://kitchenkit-bf8b5.firebaseio.com",
+    projectId: "kitchenkit-bf8b5",
+    storageBucket: "kitchenkit-bf8b5.appspot.com",
+    messagingSenderId: "44047573836"
+    };
+    firebase.initializeApp(config);
+
+    var database = firebase.database();
+
+var currentUser;
+                    // Create a callback which logs the current auth state
+                    firebase.auth().onAuthStateChanged(function (user) {
+                        console.log('authStateChanged', user);
+                        if (user) {
+                            currentUser = user;
+                            console.log(user);
+                            firebase.database().ref("pantry/" + currentUser.uid).on("child_added", function (snapshot) {
+
+                                // Log everything that's coming out of snapshot
+                                console.log(snapshot.val());
+                                console.log(snapshot.val().pantryArray);
+
+
+                                // Change the HTML to reflect
+                                $("#pantry").append(snapshot.val());
+
+
+                                // Handle the errors
+                                // }, function(errorObject) {
+                                //   console.log("Errors handled: " + errorObject.code);
+                            });
+
+                        } else {
+                            window.location.replace("login.html");
+                        }
+                    });
+
+
+    var pantryArray = JSON.parse(database.ref("pantry/" + currentUser.uid));
+    // Checks to see if the todolist exists in localStorage and is an array currently
+    // If not, set a local pantryArray variable to an empty array
+    // Otherwise pantryArray is our current pantryArray of todos
+    if (!Array.isArray(pantryArray)) {
+      pantryArray = [];
+    }
+    function putOnPage() {
+      $("#todo-pantryArray").empty(); // empties out the html
+      var insideList = JSON.parse(database.ref("pantry/" + currentUser.uid));
+      // Checks to see if we have any todos in localStorage
+      // If we do, set the local insideList variable to our todos
+      // Otherwise set the local insideList variable to an empty array
+      if (!Array.isArray(insideList)) {
+        insideList = [];
+      }
+      // render our insideList todos to the page
+      for (var i = 0; i < insideList.length; i++) {
+        var p = $("<li>").text(insideList[i]);
+        var b = $("<button class='delete'>").text("x").attr("data-index", i);
+        p.prepend(b);
+        $("#todo-pantryArray").prepend(p);
+      }
+    }
+    // render our todos on page load
+    putOnPage();
+    $(document).on("click", "button.delete", function() {
+      var foodList = JSON.parse(database.ref("pantry/" + currentUser.uid));
+      var currentIndex = $(this).attr("data-index");
+      // Deletes the item marked for deletion
+      foodList.splice(currentIndex, 1);
+      pantryArray = foodList;
+      database.ref("pantry/" + currentUser.uid, JSON.stringify(foodList));
+      putOnPage();
+    });
+    $("#submit").on("click", function(event) {
+      event.preventDefault();
+      // Setting the input value to a variable and then clearing the input
+      var val = $("#additem").val();
+      $("#additem").val("");
+      // Adding our new todo to our local pantryArray variable and adding it to local storage
+      pantryArray.push(val);
+      database.ref("pantry/" + currentUser.uid, JSON.stringify(pantryArray));
+      putOnPage();
+    });
+  </script>
+</body>
+</html>
