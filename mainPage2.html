@@ -116,6 +116,7 @@
                     
                     var pantryArray = [];
                     var foodCount = 0;
+                    
                     //Sammy's food API
                     $("#submit").on("click", function (event) {
                         event.preventDefault();
@@ -131,12 +132,9 @@
                         $("#pantry").append(newFood);
                         $("#additem").val("");
                         foodCount++;
+                        database.ref("pantry/" + currentUser.uid).push(newFood);
 
-                        var newFood = $(this).data("id");
-                                pantryArray.push(newFood);
-                                console.log(pantryArray);
-                                database.ref("pantry/" + currentUser.uid).push(newFood);
-
+         
                             });
                             
 
@@ -150,7 +148,7 @@
                                 // Log everything that's coming out of snapshot
                                 console.log(snapshot.val());
                                 console.log(snapshot.val().pantryArray);
-
+                                console.log(pantryArray[0]);
 
                                 // Change the HTML to reflect
                                 $("#pantry").append(snapshot.val());
