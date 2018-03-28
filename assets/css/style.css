@@ -8,7 +8,13 @@
 }
 .card{
 	opacity: .9;
+	background-color
 }
+.accordionButton{
+	width: 100%;
+}
+
+
 
 
 
@@ -34,7 +40,4 @@ body{background-image: url("../images/foodimage.jpg");
 }
 
 
-.card{
-	opacity: .9;
-}
 
