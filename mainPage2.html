@@ -120,19 +120,11 @@
                     //Sammy's food API
                     $("#submit").on("click", function (event) {
                         event.preventDefault();
-                        var addItem = $("#additem").val().trim();
-                        var newFood = $("<li>");
-                        newFood.attr("id", "item-" + foodCount);
-                        newFood.append(" " + addItem);
-                        var foodDelete = $("<button>");
-                        foodDelete.attr("data-id", foodCount);
-                        foodDelete.addClass("checkbox");
-                        foodDelete.append("X");
-                        newFood = newFood.prepend(foodDelete);
-                        $("#pantry").append(newFood);
+                        
+                        // $("#pantry").append(newFood);
                         $("#additem").val("");
                         foodCount++;
-                        database.ref("pantry/" + currentUser.uid).push(newFood);
+                        database.ref("pantry/" + currentUser.uid).push(addItem);
 
          
                             });
@@ -148,12 +140,23 @@
                                 // Log everything that's coming out of snapshot
                                 console.log(snapshot.val());
                                 console.log(snapshot.val().pantryArray);
-                                console.log(pantryArray[0]);
+                                console.log(pantryArray);
 
                                 // Change the HTML to reflect
-                                $("#pantry").append(snapshot.val());
+                               
+
+                               
+                        var newFood = $("<li>");
+                        newFood.attr("data-id", snapshot.key);
+                        newFood.append(" " + snapshot.val());
+                        var foodDelete = $("<button>");
+                        foodDelete.attr(snapshot.key);
+                        foodDelete.addClass("checkbox");
+                        foodDelete.append("X");
+                        newFood = newFood.prepend(foodDelete);
 
 
+                        $("#pantry").append(newFood);
                                 // Handle the errors
                                 // }, function(errorObject) {
                                 //   console.log("Errors handled: " + errorObject.code);
@@ -163,41 +166,13 @@
                             window.location.replace("login.html");
                         }
                     });
-                    //Sammy's food API
-                    // $("#submit").on("click", function (event) {
-                    //     event.preventDefault();
-                    //     var additem = $("#additem").val().trim();
-                    //     $("#listfood").empty();
-                    //     var queryURL = "https://api.nal.usda.gov/ndb/search/?&format=json&q=" + additem + "&ds=Standard+Reference&sort=r&max=10&offset=0&api_key=uyNSkR4G2nmzLN1z7unvxh1JMdwZ0IXiPP8k1QXE";
-                    //     $.ajax({
-                    //         url: queryURL,
-                    //         method: 'GET'
-                    //     }).then(function (response) {
-                    //         console.log(response);
-                    //         var results = response.list.item;
-                    //         for (var i = 0; i < results.length; i++) {
-                    //             var foodDiv = $("<div>");
-                    //             var list = $("<li>");
-                    //             list.html(results[i].name);
-                    //             list.attr("data-id", results[i].name);
-                    //             foodDiv.append(list);
-                    //             $("#listfood").append(foodDiv);
-                    //         };
-                    //         console.log(results)
-                    //         $("li").on("click", function (event) {
-
-                               
-                    //     });
-                        
+                   
 
 
 
                     });
                     
-                    // Firebase watcher + initial loader HINT: .on("value")
-
-
-                    //end of api and search
+                    
 
              
             </script>
