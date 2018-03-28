@@ -1,6 +1,6 @@
 
 .jumbotron{
-	opacity:0.5;
+	opacity:0.9;
 	
 
        
@@ -17,5 +17,20 @@ body{background-image: url("../images/foodimage.jpg");
  
 }
 
+#collapseOne{
+	background-color: #E2E3E3;
+	opacity:0.9;
+}
+#collapseTwo{
+	background-color: #E2E3E3;
+	opacity:0.9;
+}
+#collapseThree{
+	background-color: #E2E3E3;
+	opacity:0.9;
+}
+.row{
+	opacity:09;
+}
 
 
