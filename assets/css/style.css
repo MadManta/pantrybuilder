@@ -1,12 +1,15 @@
  .recipePic{
- 	height: auto;
+ 	text-align: center;
+ 	width:650px;
+ 	height:500px;
+
  }     
         .jumbotron {
     opacity: 0.9;
 }
 
 .card {
-    opacity: .9;
+    
 }
 
 .accordionButton {
