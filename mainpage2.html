@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/login.css">
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.css" />
+    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+
+    <title>Kitchen Kit Login</title>
+</head>
+
+<body>
+    <!-- Title -->
+    <!-- Input Form -->
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <button type="submit" id="logout" class="btn btn-primary">Logout</button>
+            <h1 class="display-3">Pantry Planner</h1>
+            <p class="lead">an interractive website for you to plan your shopping.</p>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="col-xs-8 col xs-offset-2">
+        </div>
+    </div>
+    <hr>
+    <ul class="sortable">
+        <h1></h1>
+        <!-- To-Do List -->
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Food Search
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="row">
+                        <div class="col-1">
+                            x
+                        </div>
+                        <div class="col-7">
+                            <div id="pantry">
+                                Items Added by User
+                            </div>
+                        </div>
+                        <!-- API SEARCH BUTTON-->
+                        <div class="col-4">
+                            <div class="addfood">
+                                <nav class="navbar navbar-light bg-light">
+                                    <form class="form-inline">
+                                        <input class="form-control mr-sm-2" type="search" placeholder="Search" id="additem" aria-label="Search">
+                                        <button class="btn btn-outline-success my-2 my-sm-0" id="submit" type="submit">Add Food</button>
+                                    </form>
+                                </nav>
+                            </div>
+                            <div id="listfood">
+                                search results here
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Grocery List
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                        this will be an apended list of items
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Recipe Search
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                        this will have a search bar that will show ingredients for recipes that we can select and append them to the ht
+                    </div>
+                </div>
+            </div>
+            <!-- jQuery -->
+            <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+            <!-- Script -->
+            <script>
+                $(document).ready(function () {
+                    var pantryArray = [];
+                    var foodCount = 0;
+                    //Sammy's food API
+                    var pantryArray = JSON.parse(database.ref("pantry/" + currentUser.uid));
+    // Checks to see if the todolist exists in localStorage and is an array currently
+    // If not, set a local pantryArray variable to an empty array
+    // Otherwise pantryArray is our current pantryArray of todos
+    if (!Array.isArray(pantryArray)) {
+      pantryArray = [];
+    }
+    function putOnPage() {
+      $("#todo-pantryArray").empty(); // empties out the html
+      var insideList = JSON.parse(database.ref("pantry/" + currentUser.uid));
+      // Checks to see if we have any todos in localStorage
+      // If we do, set the local insideList variable to our todos
+      // Otherwise set the local insideList variable to an empty array
+      if (!Array.isArray(insideList)) {
+        insideList = [];
+      }
+      // render our insideList todos to the page
+      for (var i = 0; i < insideList.length; i++) {
+        var p = $("<li>").text(insideList[i]);
+        var b = $("<button class='delete'>").text("x").attr("data-index", i);
+        p.prepend(b);
+        $("#todo-pantryArray").prepend(p);
+      }
+    }
+    // render our todos on page load
+    putOnPage();
+    $(document).on("click", "button.delete", function() {
+      var foodList = JSON.parse(database.ref("pantry/" + currentUser.uid));
+      var currentIndex = $(this).attr("data-index");
+      // Deletes the item marked for deletion
+      foodList.splice(currentIndex, 1);
+      pantryArray = foodList;
+      database.ref("pantry/" + currentUser.uid, JSON.stringify(foodList));
+      putOnPage();
+    });
+    $("#submit").on("click", function(event) {
+      event.preventDefault();
+      // Setting the input value to a variable and then clearing the input
+      var val = $("#additem").val();
+      $("#additem").val("");
+      // Adding our new todo to our local pantryArray variable and adding it to local storage
+      pantryArray.push(val);
+      database.ref("pantry/" + currentUser.uid, JSON.stringify(pantryArray));
+      putOnPage();
+    });
+                    var database = firebase.database();
+                        //     console.log(results)
+                        //     $("li").on("click", function (event) {
+                        //         var newFood = $(this).data("id");
+                        //         pantryArray.push(newFood);
+                        //         console.log(pantryArray);
+                        //         database.ref("pantry/" + currentUser.uid).push(newFood);
+                        //     });
+                        // });
+                        // var database = firebase.database();
+                    var currentUser;
+                    // Create a callback which logs the current auth state
+                    firebase.auth().onAuthStateChanged(function (user) {
+                        console.log('authStateChanged', user);
+                        if (user) {
+                            currentUser = user;
+                            console.log(user);
+                            firebase.database().ref("pantry/" + currentUser.uid).on("child_added", function (snapshot) {
+                                // Log everything that's coming out of snapshot
+                                console.log(snapshot.val());
+                                console.log(snapshot.val().pantryArray);
+                                // Change the HTML to reflect
+                                $("#pantry").append(snapshot.val());
+                                // Handle the errors
+                                // }, function(errorObject) {
+                                //   console.log("Errors handled: " + errorObject.code);
+                            });
+                        } else {
+                            window.location.replace("login.html");
+                        }
+                    });
+                    // Firebase watcher + initial loader HINT: .on("value")
+                    //end of api and search
+                    // Create an initial toDoCount variable
+                    var toDoCount = 0;
+                    //  On Click event associated with the add-to-do function
+                    $("#add-to-food").on("click", function (event) {
+                        event.preventDefault();
+                        // Get the to-do "value" from the textbox and store it a variable
+                        var toDoTask = $("#to-food").val().trim();
+                        // Create a new variable that will hold a "<p>" tag.
+                        // Then give it an ID in the following form:
+                        // "item-4" or "item-3" or "item-99", where the number is equal to toDoCount.
+                        // Then append the to-do "value" as text to this <p> element.
+                        var toDoItem = $("<p>");
+                        toDoItem.attr("id", "item-" + toDoCount);
+                        toDoItem.append(" " + toDoTask);
+                        // Create a button with unique identifiers based on what number it is in the list. Again use jQuery to do this.
+                        // Give your button a data attribute called data-to-do and a class called "checkbox".
+                        // Lastly append the letter X inside.
+                        var toDoClose = $("<button>");
+                        toDoClose.attr("data-to-food", toDoCount);
+                        toDoClose.addClass("checkbox");
+                        toDoClose.append("✓");
+                        // Append the button to the to do item
+                        toDoItem = toDoItem.prepend(toDoClose);
+                        // Add the button and to do item to the to-dos div
+                        $("#to-dos").append(toDoItem);
+                        // Clear the textbox when done
+                        $("#to-food").val("");
+                        // Add to the toDoCount
+                        toDoCount++;
+                    });
+                    // When a user clicks a check box then delete the specific content
+                    // (NOTE: Pay attention to the unusual syntax here for the click event.
+                    // Because we are creating click events on "dynamic" content, we can't just use the usual "on" "click" syntax.)
+                    $(document.body).on("click", ".checkbox", function () {
+                        // Get the number of the button from its data attribute and hold in a variable called  toDoNumber.
+                        var toDoNumber = $(this).attr("data-to-food");
+                        // Select and Remove the specific <p> element that previously held the to do item number.
+                        $("#item-" + toDoNumber).remove();
+                    });                
+});
+            </script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+                crossorigin="anonymous">
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+            <!-- logout and auth  -->
+            <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+            <script type="text/javascript" src="assets/login.js"></script>
+
+            <script>
+                // User Signout
+                $("#logout").click(function () {
+                    firebase.auth().signOut().then(function () {
+                        // Sign-out successful.
+                        window.location.replace("login.html");
+                    }).catch(function (error) {
+                        // An error happened.
+                        console.log('Logout Error');
+                    });
+                });
+            </script>
+</body>
+
+</html>
