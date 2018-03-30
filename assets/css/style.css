@@ -1,54 +1,58 @@
-
-.jumbotron{
-	opacity:0.9;
-	
-
-       
-
-}
-.card{
-	opacity: .9;
-	
-}
-.accordionButton{
-	width: 100%;
-	background-color: #C3CACC;
-
+ .recipePic{
+ 	height: auto;
+ }     
+        .jumbotron {
+    opacity: 0.9;
 }
 
-.accordionButton2{
-	width: 100%;
-	background-color: #C3CACC;
-
+.card {
+    opacity: .9;
 }
-.accordionButton3{
-	width: 100%;
-	background-color: #C3CACC;
 
+.accordionButton {
+    width: 100%;
+    background-color: #C3CACC;
+}
+
+.accordionButton2 {
+    width: 100%;
+    background-color: #C3CACC;
+}
+
+.accordionButton3 {
+    width: 100%;
+    background-color: #C3CACC;
 }
 
 body {
     background: gray;
 }
+
 #tableIng {
     width: 35%;
-        }
+}
+
 #tableMeas {
     width: 20%;
-        }
+}
+
 #tableUnit {
     width: 35%;
-        }
+}
+
 #tableAdd {
     width: 10%;
-        }
+}
+
 #recipeNameGroup {
     margin-top: 10px;
 }
+
 #recipeSearchForm {
     margin-top: 10px;
     margin-bottom: 2px;
 }
+
 .expandButton {
     width: 100%;
     text-align: center;
@@ -57,15 +61,19 @@ body {
     border-width: 2px;
     margin-bottom: 2px;
 }
+
 .myRecipeNames {
     width: 35%;
 }
-.myRecipeMeasures{
+
+.myRecipeMeasures {
     width: 20%;
 }
+
 .myRecipeUnits {
-    width:35%;
+    width: 35%;
 }
+
 .myRecipeAvailable {
     width: 10%;
 }
@@ -75,26 +83,27 @@ body {
 
 
 
-body{background-image: url("../images/foodimage.jpg");
-	background-repeat: no-repeat;
-	-webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-    }
-    @media screen and (min-width: width:980px;){
-
-        @media screen and (min-width: width:768px;){
-
-		body{
-			padding-top: 50px;
-		}
-		@media screen and (min-width: width:640px;){
-
-		body{
-			padding-top: 50px;
-		}
- 
+body {
+    background-image: url("../images/foodimage.jpg");
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
 
+@media screen and (min-width: width:980px;
+) {
 
+    @media screen and (min-width: width:768px;
+    ) {
 
+        body {
+            padding-top: 50px;
+        }
+        @media screen and (min-width: width:640px;
+        ) {
+
+            body {
+                padding-top: 50px;
+            }
+        }
