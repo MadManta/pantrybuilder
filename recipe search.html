@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel = "stylesheet" type = "text/css" href = "style.css">
+</head>
+<body>
+    <div class = "container">
+    <form id = "recipeSearchForm" >
+        <input type = "text" id = "recipeSearch">
+        <button clas = "btn btn-primary" id = "go">Search for a recipe</button>
+    </form>
+    <div id = "recipeSearchResults"></div>
+    <button class="btn btn-primary expandButton" type="button" data-toggle="collapse" data-target="#recipeList" aria-expanded="false" aria-controls="recipeList">
+            My Recipes
+    </button>
+    <div class="collapse" id="recipeList">
+        <div class="card card-body" id = "recipeListCard"></div>
+    </div><br>
+    <button class = "btn btn-primary expandButton" type = "button" data-toggle = "collapse" data-target = "#addRecipeForm" aria-expanded = "false" aria-controls = "addRecipeForm">
+        Add your own recipe
+    </button>
+    <div class = "collapse" id = "addRecipeForm">
+        <!-- <div class = "card card-body"> -->
+                <div class = "form-group" id = "recipeNameGroup">
+                        <label for = "recipeName">Recipe Name: </label>
+                        <input type = "text" id = "recipeName">
+                    </div>
+                    <table id = "ingTable" class = "table">
+                        <thead>
+                            <tr>    
+                                    <th id = "tableIng">Ingredient</th>
+                                    <th id = "tableMeas">Amt.</th>
+                                    <th id = "tableUnit">Unit</th>
+                                    <th id = "tableAdd"></th>
+                            </tr>
+                        </thead>
+                        <tbody id = "ingredients">
+                            <div class = "form-group row">
+                                <td><!--where to enter the name of the ingredient-->
+                                    <input type = "text" class = "form-control ingredient" id = "ing1">
+                                </td>
+                                <td><!--enter the amount as a number-->
+                                    <input type = "number" class = "form-control measure" id = "meas1">
+                                </td>
+                                <td><!--enter the unit of measure-->
+                                    <select class = "form-control unit" id = "unit1">
+                                        <option>-----</option>
+                                        <option>each</option>
+                                        <option>tsp</option>
+                                        <option>Tbsp</option>
+                                        <option>cup(s)</option>
+                                        <option>qt</option>
+                                        <option>gal</option>
+                                        <option>oz</option>
+                                        <option>lbs</option>
+                                        <option>ml</option>
+                                        <option>L</option>
+                                        <option>mg</option>
+                                        <option>g</option>
+                                        <option>Kg</option>
+                                    </select>
+                                </td>
+                                <td><!--button to add another ingredient-->
+                                    <button class = "addIngredient" id = "addIng1"><strong>+</strong></button>
+                                </td>
+                            </div>
+                        </tbody>
+                    </table>
+                    <div class = "form-group">
+                        <label for="directions">Directions:</label>
+                        <textarea class = "form-control" id = "directions" rows = "5"></textarea>
+                    </div>
+                    <button class = "btn btn-primary" id = "addRecipe">Done</button>
+        <!-- </div> -->
+    </div>
+    </div>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src = "code.js"> </script>
+</body>
+</html>

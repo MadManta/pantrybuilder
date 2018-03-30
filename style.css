@@ -1,0 +1,42 @@
+body {
+    background: gray;
+}
+#tableIng {
+    width: 35%;
+        }
+#tableMeas {
+    width: 20%;
+        }
+#tableUnit {
+    width: 35%;
+        }
+#tableAdd {
+    width: 10%;
+        }
+#recipeNameGroup {
+    margin-top: 10px;
+}
+#recipeSearchForm {
+    margin-top: 10px;
+    margin-bottom: 2px;
+}
+.expandButton {
+    width: 100%;
+    text-align: center;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    margin-bottom: 2px;
+}
+.myRecipeNames {
+    width: 35%;
+}
+.myRecipeMeasures{
+    width: 20%;
+}
+.myRecipeUnits {
+    width:35%;
+}
+.myRecipeAvailable {
+    width: 10%;
+}
