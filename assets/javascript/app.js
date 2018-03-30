@@ -1,5 +1,5 @@
  //bobs recipe query
- 
+
 
     //Sammy's Grocery add API
 
@@ -375,6 +375,7 @@ $addRecipe.click(function(event){
 $(document).on("click", ".resultButton", function(event){
     var target = "collapse-" + event.currentTarget.id;
     $("#" + target).collapse("toggle");
+    
 });
 
 //click listener for the clear button

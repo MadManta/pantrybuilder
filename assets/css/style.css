@@ -15,6 +15,18 @@
 	background-color: #C3CACC;
 
 }
+
+.accordionButton2{
+	width: 100%;
+	background-color: #C3CACC;
+
+}
+.accordionButton3{
+	width: 100%;
+	background-color: #C3CACC;
+
+}
+
 body {
     background: gray;
 }
@@ -57,6 +69,8 @@ body {
 .myRecipeAvailable {
     width: 10%;
 }
+
+
 
 
 
