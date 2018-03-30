@@ -19,10 +19,6 @@ h1{
    vertical-align: middle;
 }
 
-ul#grocery {
-    list-style-image: url('checkbox.png');
-}
-
 #login-input{
     text-align: center;
 }
@@ -30,4 +26,6 @@ ul#grocery {
 label{
     display: block;
     
+
 }
+
