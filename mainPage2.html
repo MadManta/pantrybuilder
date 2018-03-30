@@ -1,3 +1,18 @@
+Skip to content
+ 
+Search
+Pull requests
+Issues
+Marketplace
+Explore
+ @dansasaki12
+Sign out
+0
+0 0 MadManta/pantrybuilder
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights
+pantrybuilder/mainPage2.html 
+Newer           Older
+ 100644  216 lines (170 sloc)  9.12 KB
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,7 +127,6 @@
                     var currentUser;
                     // Create a callback which logs the current auth state
                     
-
                     
                     var pantryArray = [];
                     var foodCount = 0;
@@ -122,29 +136,24 @@
                         event.preventDefault();
                         
                         // $("#pantry").append(newFood);
-                        $("#additem").val("");
+                        var addItem = $("#additem").val().trim();
                         foodCount++;
                         database.ref("pantry/" + currentUser.uid).push(addItem);
-
          
                             });
                             
-
                         firebase.auth().onAuthStateChanged(function (user) {
                         console.log('authStateChanged', user);
                         if (user) {
                             currentUser = user;
                             console.log(user);
                             firebase.database().ref("pantry/" + currentUser.uid).on("child_added", function (snapshot) {
-
                                 // Log everything that's coming out of snapshot
                                 console.log(snapshot.val());
                                 console.log(snapshot.val().pantryArray);
                                 console.log(pantryArray);
-
                                 // Change the HTML to reflect
                                
-
                                
                         var newFood = $("<li>");
                         newFood.attr("data-id", snapshot.key);
@@ -154,26 +163,19 @@
                         foodDelete.addClass("checkbox");
                         foodDelete.append("X");
                         newFood = newFood.prepend(foodDelete);
-
-
                         $("#pantry").append(newFood);
                                 // Handle the errors
                                 // }, function(errorObject) {
                                 //   console.log("Errors handled: " + errorObject.code);
                             });
-
                         } else {
                             window.location.replace("login.html");
                         }
                     });
                    
-
-
-
                     });
                     
                     
-
              
             </script>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -207,9 +209,6 @@
                         console.log('Logout Error');
                     });
                 });
-
-
-
             </script>
 </body>
 
