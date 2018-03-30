@@ -29,6 +29,10 @@ ul {
     list-style-type: none; 
 } 
 
+ul#grocery {
+    list-style-image: url('checkbox.png');
+}
+
 .foods {
     font-size:12pt;
 }
