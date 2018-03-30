@@ -2,7 +2,15 @@
 <html lang="en-us">
 
 <head>
-  
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="assets/login.css">
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.css" />
+    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
@@ -10,18 +18,19 @@
   <i class="em em-some-emoji"></i>
 
     <meta charset="UTF-8">
-    <title>Pantry Planner!</title>
+    <title>Kitchen Kit!</title>
     <style>
 
     </style>
+
 </head>
 
 <body>
-    <!-- Title -->
+
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-3">Pantry Planner</h1>
-            <p class="lead">A handy app to help you manage your pantry and grocery list!</p>
+            <h1 class="display-3">Kitchen Kit</h1>
+            <p class="lead">Stock your pantry and plan your meals</p>
         </div>
     </div>
     <!-- Input Form -->
@@ -30,7 +39,6 @@
         </div>
     </div>
     <hr>
-    
     <!-- food list -->
     <div id="accordion">
         <div class="card">
@@ -38,7 +46,7 @@
                 <h5 class="mb-0">
                     <button class="btn btn-light accordionButton" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                       <i><i class="em em-bacon"></i></i> 
-                       Search for food!
+                       Fill Out Your Pantry
                     </button>
                     
                 </h5>
@@ -57,14 +65,16 @@
                         </div>
                     </div>
                     <!-- API SEARCH BUTTON-->
-                    <div class="col-4">
-                        <div class="addfood">
-                            <form class="form-inline">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Search" id="additem" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" id="submit" type="submit">Add Food</button>
-                            </form>
-                        </div>
-                        <div id="listfood">
+                        <div class="col-4">
+                            <div class="addfood">
+                                <nav class="navbar navbar-light bg-light">
+                                    <form class="form-inline">
+                                        <input class="form-control mr-sm-2" type="search" placeholder="Search" id="additem" aria-label="Search">
+                                        <button class="btn btn-outline-success my-2 my-sm-0" id="submit" type="submit">Add Food</button>
+                                    </form>
+                                </nav>
+                            </div>
+                            <div id="listfood">
                             
                         </div>
                     </div>
@@ -104,6 +114,8 @@
                     </div>
                 </div>
             </div>
+
+           
         </div>
         <div class="card">
             <div class="card-header" id="headingThree">
@@ -195,10 +207,30 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="assets/javascript/app.js"></script>
     <script src="html5sortable.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    
+    <script type="text/javascript" src="assets/login.js"></script>
     <script src="jquery-ui.js"></script>
+            
+            <!-- logout and auth  -->
+
+
+            <script>
+                // User Signout
+                $("#logout").click(function () {
+                    firebase.auth().signOut().then(function () {
+                        // Sign-out successful.
+                        window.location.replace("login.html");
+                    }).catch(function (error) {
+                        // An error happened.
+                        console.log('Logout Error');
+                    });
+                });
+
+
+
+            </script>
+          
+          
 </body>
 
 </html>
