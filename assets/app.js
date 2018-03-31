@@ -65,7 +65,7 @@
                     var newFood = $("<li class='foods' id='deleteFood" + foodCount + "'>");
                     newFood.attr("data-id", snapshot.key);
                     newFood.append(" " + snapshot.val());
-                    var foodDelete = $("<img src='assets/close.png' class='delete' id='deleteButton" + foodCount + "'>");
+                    var foodDelete = $("<img src='assets/close.png' class='delete' id='deleteFoodButton" + foodCount + "'>");
                     //var foodDelete = $("<button class='btn-outline-danger btn-sm delete rounded-circle' id='deleteButton" + foodCount + "'>");
                         foodCount++;
                     foodDelete.attr(snapshot.key);
@@ -74,6 +74,11 @@
                     //foodDelete.append("x");
                     newFood = newFood.append(foodDelete);
                     $("#pantry").append(newFood);
+                    //update my recipe display
+                    $recipeListCard.empty();
+                    for (var i = 0; i < myRecipes.length; i++){
+                        displayRecipe(myRecipes[i], i);
+                    }
 
 
                     $(document.body).on("click", ".checkbox", function (event) {
@@ -81,9 +86,16 @@
                         console.log(removeItem);
                         firebase.database().ref("pantry/" + currentUser.uid).child(removeItem).remove();
 
-                        var target = parseInt(event.currentTarget.id.substr(12))
+                        var target = parseInt(event.currentTarget.id.substr(16));
+                        console.log("before splice: " + pantryArray);
                         pantryArray.splice(target, 1);
+                        console.log("after splice: " + pantryArray);
                         $("#deleteFood" + target).remove();
+                        //update my recipe display
+                        $recipeListCard.empty();
+                        for (var i = 0; i < myRecipes.length; i++){
+                            displayRecipe(myRecipes[i], i);
+                        }
                     });
                     
                 });
@@ -278,7 +290,7 @@ function displayResult(object) {
 
 //function to display a recipe from myrecipes
 function displayRecipe(recipe, int) {
-    console.log(recipe);
+    //console.log(recipe);
     var match = "";
     $recipeListCard.append(
         "<button class = 'btn btn-dark expandButton resultButton' id = 'myRecipe" + int + "'>" + recipe.name + "</button>" +
@@ -441,7 +453,7 @@ $addRecipe.click(function(event){
         directions: directions,
         source: "User Submitted Recipe"
     }
-    console.log(recipe);
+    //console.log(recipe);
     //add our new recipe to myRecipes
     myRecipes.push(recipe);
     //Add our new recipe to the 'myrecipes' folder
@@ -502,10 +514,14 @@ $(document).on("click", ".clearButton", function(event){
 $(document).on("click", ".deleteRecipe", function(event) {
     var itemVal = parseInt(event.currentTarget.id.substr(6));
     myRecipes.splice(itemVal, 1);
+    //update my recipe display
     $recipeListCard.empty();
     for (var i = 0; i < myRecipes.length; i++){
         displayRecipe(myRecipes[i], i);
     }
+    //update the local storage (eventually the database)
+    localStorage.clear();
+    localStorage.setItem("recipes", JSON.stringify(myRecipes));
 });
 
 //function to initialize my recipes on load
