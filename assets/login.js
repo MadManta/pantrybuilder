@@ -18,11 +18,15 @@ var config = {
     //
     
     var uiConfig = {
+        //Start it here 
+    credentialHelper: firebaseui.auth.CredentialHelper.ACCOUNT_CHOOSER_COM,
+    //End it here 
+    signInFlow: 'popup',
+    'credentialHelper': firebaseui.auth.CredentialHelper.NONE,
         signInSuccessUrl: "kitchen.html",
         signInOptions: [
           // Leave the lines as is for the providers you want to offer your users.
           firebase.auth.EmailAuthProvider.PROVIDER_ID,
-            'credentialHelper': firebaseui.auth.CredentialHelper.NONE;
         ],
         
         // Terms of service url.
