@@ -27,12 +27,13 @@ var config = {
         // Terms of service url.
         tosUrl: '<your-tos-url>'
       };
+'credentialHelper': firebaseui.auth.CredentialHelper.NONE;
     
       // Initialize the FirebaseUI Widget using Firebase.
       var ui = new firebaseui.auth.AuthUI(firebase.auth());
       // The start method will wait until the DOM is loaded.
       ui.start('#firebaseui-auth-container', uiConfig);
-    'credentialHelper': firebaseui.auth.CredentialHelper.NONE;
+    
     
       //Auth Check & User Log
         firebase.auth().onAuthStateChanged(function(user) {
