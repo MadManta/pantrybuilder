@@ -27,7 +27,7 @@ var config = {
         // Terms of service url.
         tosUrl: '<your-tos-url>'
       };
-'credentialHelper': firebaseui.auth.CredentialHelper.NONE;
+
     
       // Initialize the FirebaseUI Widget using Firebase.
       var ui = new firebaseui.auth.AuthUI(firebase.auth());
