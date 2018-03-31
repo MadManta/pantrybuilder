@@ -23,6 +23,7 @@ var config = {
           // Leave the lines as is for the providers you want to offer your users.
           firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
+        'credentialHelper': firebaseui.auth.CredentialHelper.NONE;
         // Terms of service url.
         tosUrl: '<your-tos-url>'
       };
