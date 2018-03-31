@@ -23,7 +23,7 @@ var config = {
           // Leave the lines as is for the providers you want to offer your users.
           firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
-        'credentialHelper': firebaseui.auth.CredentialHelper.NONE;
+        
         // Terms of service url.
         tosUrl: '<your-tos-url>'
       };
@@ -32,7 +32,7 @@ var config = {
       var ui = new firebaseui.auth.AuthUI(firebase.auth());
       // The start method will wait until the DOM is loaded.
       ui.start('#firebaseui-auth-container', uiConfig);
-    
+    'credentialHelper': firebaseui.auth.CredentialHelper.NONE;
     
       //Auth Check & User Log
         firebase.auth().onAuthStateChanged(function(user) {
