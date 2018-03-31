@@ -281,7 +281,7 @@ function displayResult(object) {
                                 "<div class = 'collapse resultCollapse' id = 'collapse-result" + searchResults.hits.indexOf(object) +"'>" +
                                     "<div class = 'card card-body'>" +
                                         "<a href = " + object.recipe.url + " target = '_/blank'>Source: " + object.recipe.source + "</a>" +
-                                        "<img src = '" + object.recipe.image + "' alt = recipePic>" + 
+                                        "<img class='img-fluid' src = '" + object.recipe.image + "' alt = recipePic>" + 
                                         "<button class = 'button btn-success searchResultAddButton' id = " + searchResults.hits.indexOf(object) + ">Add to My Recipes</button>" +
                                     "</div>" +
                                 "</div>"
